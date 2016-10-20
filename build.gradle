@@ -49,11 +49,11 @@ docker {
 
 task buildDockerImage(type: DockerBuildImage, dependsOn: build) {
     inputDir = file('./')
-    tag = 'localhost:5000/' + jar.baseName + ':latest'
+    tag = '192.168.99.100:5000/' + jar.baseName + ':latest'
 }
 
 task dockerPushImage(type: DockerPushImage, dependsOn: buildDockerImage) {
-    imageName = 'localhost:5000/' + jar.baseName
+    imageName = '192.168.99.100:5000/' + jar.baseName
     tag = 'latest'
 }
 

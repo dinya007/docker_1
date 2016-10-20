@@ -1,0 +1,62 @@
+group 'ru.tisov.denis'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+        classpath 'com.bmuschko:gradle-docker-plugin:3.0.3'
+    }
+}
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
+
+group = 'dtisov'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+
+jar {
+    baseName = 'docker_1'
+    version = '1.0-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+docker {
+    url = 'https://192.168.99.100:2376'
+    certPath = new File(System.properties['user.home'], '.docker/machine/machines/default')
+    apiVersion = 2
+}
+
+task buildDockerImage(type: DockerBuildImage, dependsOn: build) {
+    inputDir = file('./')
+    tag = 'localhost:5000/' + jar.baseName + ':latest'
+}
+
+task dockerPushImage(type: DockerPushImage, dependsOn: buildDockerImage) {
+    imageName = 'localhost:5000/' + jar.baseName
+    tag = 'latest'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.8'
+}

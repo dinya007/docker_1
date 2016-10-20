@@ -51,14 +51,19 @@ docker {
 //    }
 }
 
+ext {
+    dockerImageName = '10.38.135.73:5000/' + jar.baseName
+    dockerImageVersion = 'latest'
+}
+
 task buildDockerImage(type: DockerBuildImage, dependsOn: build) {
     inputDir = file('./')
-    tag = 'localhost:5000/' + jar.baseName + ':latest'
+    tag = dockerImageName + ':' + dockerImageVersion
 }
 
 task dockerPushImage(type: DockerPushImage, dependsOn: buildDockerImage) {
-    imageName = 'localhost:5000/' + jar.baseName
-    tag = 'latest'
+    imageName = dockerImageName
+    tag = dockerImageVersion
 }
 
 task wrapper(type: Wrapper) {

@@ -52,7 +52,7 @@ docker {
 }
 
 ext {
-    dockerImageName = '10.38.135.73:5000/' + jar.baseName
+    dockerImageName = 'localhost:5000/' + jar.baseName
     dockerImageVersion = 'latest'
 }
 

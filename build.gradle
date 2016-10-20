@@ -42,7 +42,7 @@ dependencies {
 }
 
 docker {
-    url = 'https://192.168.99.100:2376'
+    url = 'https://127.0.0.1:2376'
     certPath = new File(System.properties['user.home'], '.docker/machine/machines/default')
     apiVersion = 1.12
 

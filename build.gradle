@@ -43,7 +43,7 @@ dependencies {
 
 docker {
     url = 'https://192.168.99.100:2376'
-    certPath = new File('/Users/denis/.docker/machine/machines/default')
+    certPath = new File(System.properties['user.home'], '.docker/machine/machines/default')
     apiVersion = 1.12
 
 //    registryCredentials {

@@ -11,7 +11,7 @@ buildscript {
     }
 }
 
-import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 
@@ -42,13 +42,10 @@ dependencies {
 }
 
 docker {
-    url = 'http://192.168.99.100:2376'
+    url = 'https://192.168.99.100:2376'
     certPath = new File(System.properties['user.home'], '.docker/machine/machines/default')
     apiVersion = 1.12
 
-//    registryCredentials {
-//        url = 'https://192.168.99.100:2376/v2/'
-//    }
 }
 
 ext {

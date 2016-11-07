@@ -18,6 +18,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 group = 'dtisov'
 
 apply plugin: 'java'
+apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'com.bmuschko.docker-remote-api'
@@ -61,6 +62,19 @@ task buildDockerImage(type: DockerBuildImage, dependsOn: build) {
 task dockerPushImage(type: DockerPushImage, dependsOn: buildDockerImage) {
     imageName = dockerImageName
     tag = dockerImageVersion
+}
+
+uploadArchives {
+    repositories{
+        mavenDeployer {
+            repository(url: "http://192.168.99.100:8081/nexus/content/repositories/snapshots") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.groupId = 'ru.tisov.denis'
+            pom.artifactId = 'docker_1'
+            pom.version = "1.0-SNAPSHOT"
+        }
+    }
 }
 
 task wrapper(type: Wrapper) {

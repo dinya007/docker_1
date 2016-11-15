@@ -18,7 +18,7 @@ public class HelloController {
         return "Hello";
     }
 
-    @RequestMapping("/stats")
+    @RequestMapping({"/", "/stats"})
     public String stats() {
         RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
         return runtimeMxBean.getInputArguments().toString() + System.currentTimeMillis();

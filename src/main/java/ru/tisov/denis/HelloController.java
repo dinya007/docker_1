@@ -21,7 +21,9 @@ public class HelloController {
     @RequestMapping({"/", "/stats"})
     public String stats() {
         RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-        return runtimeMxBean.getInputArguments().toString() + System.currentTimeMillis();
+        return "Input args: " + runtimeMxBean.getInputArguments().toString() +
+                "\nJAVA_OPTS: " + System.getenv("JAVA_HOME") +
+                "\n" + System.currentTimeMillis();
     }
 
     @RequestMapping("/HelloWorld")

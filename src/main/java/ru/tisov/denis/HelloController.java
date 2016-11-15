@@ -23,7 +23,15 @@ public class HelloController {
         RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
         return "Input args: " + runtimeMxBean.getInputArguments().toString() +
                 "\nJAVA_OPTS: " + System.getenv("JAVA_OPTS") +
-                "\n" + System.currentTimeMillis();
+                // Get current size of heap in bytes
+                "\nCurrent heapsize: " + Runtime.getRuntime().totalMemory() +
+                // Get maximum size of heap in bytes. The heap cannot grow beyond this size.// Any attempt will result in an OutOfMemoryException.
+                "\nMax heap size: " + Runtime.getRuntime().maxMemory() +
+
+                // Get amount of free memory within the heap in bytes. This size will increase // after garbage collection and decrease as new objects are created.
+                "\nFree memory: " + Runtime.getRuntime().freeMemory() +
+
+                "\nCurrent time: " + System.currentTimeMillis();
     }
 
     @RequestMapping("/HelloWorld")

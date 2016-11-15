@@ -22,7 +22,7 @@ public class HelloController {
     public String stats() {
         RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
         return "Input args: " + runtimeMxBean.getInputArguments().toString() +
-                "\nJAVA_OPTS: " + System.getenv("JAVA_HOME") +
+                "\nJAVA_OPTS: " + System.getenv("JAVA_OPTS") +
                 "\n" + System.currentTimeMillis();
     }
 

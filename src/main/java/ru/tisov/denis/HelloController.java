@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.util.Date;
 
 @RestController
 public class HelloController {
@@ -19,8 +20,10 @@ public class HelloController {
         return "Hello";
     }
 
-    @Value("${name}")
-    private String name;
+    @Value("${first.name}")
+    private String firstName;
+    @Value("${last.name}")
+    private String lastName;
 
     @RequestMapping({"/", "/stats"})
     public String stats() {
@@ -35,8 +38,9 @@ public class HelloController {
                 // Get amount of free memory within the heap in bytes. This size will increase // after garbage collection and decrease as new objects are created.
                 "\nFree memory: " + Runtime.getRuntime().freeMemory() +
 
-                "\nCurrent time: " + System.currentTimeMillis() +
-                "\nName: " + name;
+                "\nCurrent time: " + new Date() +
+                "\nFirst Name: " + firstName +
+                "\nLast Name: " + lastName;
     }
 
     @RequestMapping("/HelloWorld")

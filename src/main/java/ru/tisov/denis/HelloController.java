@@ -1,5 +1,6 @@
 package ru.tisov.denis;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +19,9 @@ public class HelloController {
         return "Hello";
     }
 
+    @Value("${name}")
+    private String name;
+
     @RequestMapping({"/", "/stats"})
     public String stats() {
         RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
@@ -31,7 +35,8 @@ public class HelloController {
                 // Get amount of free memory within the heap in bytes. This size will increase // after garbage collection and decrease as new objects are created.
                 "\nFree memory: " + Runtime.getRuntime().freeMemory() +
 
-                "\nCurrent time: " + System.currentTimeMillis();
+                "\nCurrent time: " + System.currentTimeMillis() +
+                "\nName: " + name;
     }
 
     @RequestMapping("/HelloWorld")

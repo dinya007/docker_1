@@ -20,6 +20,11 @@ public class HelloController {
         return "Hello";
     }
 
+    @RequestMapping("/world")
+    public String world() {
+        return "World";
+    }
+
     @Value("${first.name}")
     private String firstName;
     @Value("${last.name}")
@@ -29,18 +34,18 @@ public class HelloController {
     public String stats() {
         RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
         return "Input args: " + runtimeMxBean.getInputArguments().toString() +
-                "\nJAVA_OPTS: " + System.getenv("JAVA_OPTS") +
-                // Get current size of heap in bytes
-                "\nCurrent heapsize: " + Runtime.getRuntime().totalMemory() +
-                // Get maximum size of heap in bytes. The heap cannot grow beyond this size.// Any attempt will result in an OutOfMemoryException.
-                "\nMax heap size: " + Runtime.getRuntime().maxMemory() +
+            "\nJAVA_OPTS: " + System.getenv("JAVA_OPTS") +
+            // Get current size of heap in bytes
+            "\nCurrent heapsize: " + Runtime.getRuntime().totalMemory() +
+            // Get maximum size of heap in bytes. The heap cannot grow beyond this size.// Any attempt will result in an OutOfMemoryException.
+            "\nMax heap size: " + Runtime.getRuntime().maxMemory() +
 
-                // Get amount of free memory within the heap in bytes. This size will increase // after garbage collection and decrease as new objects are created.
-                "\nFree memory: " + Runtime.getRuntime().freeMemory() +
+            // Get amount of free memory within the heap in bytes. This size will increase // after garbage collection and decrease as new objects are created.
+            "\nFree memory: " + Runtime.getRuntime().freeMemory() +
 
-                "\nCurrent time: " + new Date() +
-                "\nFirst Name: " + firstName +
-                "\nLast Name: " + lastName;
+            "\nCurrent time: " + new Date() +
+            "\nFirst Name: " + firstName +
+            "\nLast Name: " + lastName;
     }
 
     @RequestMapping("/HelloWorld")

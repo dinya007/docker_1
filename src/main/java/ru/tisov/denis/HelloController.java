@@ -50,7 +50,17 @@ public class HelloController {
 
     @RequestMapping("/HelloWorld")
     public String helloWorld() {
-        return "Hello " + restTemplate.getForEntity("http://WorldContainer:8080/world", String.class).getBody();
+        return "Hello " + restTemplate.getForEntity("http://WorldContainer:8080/world", String.class).getBody() + "!";
+    }
+
+    @RequestMapping("/WorldHello")
+    public String worldHello() {
+        return restTemplate.getForEntity("http://HelloContainer:8080/hello", String.class).getBody() + " World!";
+    }
+
+    @RequestMapping("/Sasha")
+    public String sasha() {
+        return "Sasha hello!";
     }
 
 }

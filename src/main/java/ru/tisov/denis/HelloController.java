@@ -14,7 +14,6 @@ public class HelloController {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-
     @RequestMapping("/hello")
     public String hello() {
         return "Hello";
